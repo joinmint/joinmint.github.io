@@ -63,44 +63,44 @@ function doPost(e) {
       }
     }
     var row = [
-      submittedAt,
-      data.firstName || '',
-      data.lastName || '',
-      data.dob || '',
-      data.age || '',
-      data.phone || '',
-      data.email || '',
-      data.address || '',
-      data.cityStateZip || '',
-      data.preferredContact || '',
-      data.guardianName || '',
-      data.guardianPhone || '',
-      data.guardianEmail || '',
-      data.guardianRelationship || '',
-      data.enrolledInSchool || '',
-      data.currentSchool || '',
-      data.highestGrade || '',
-      data.currentlyWorking || '',
-      data.otherProgram || '',
-      data.otherProgramName || '',
-      data.reliableTransportation || '',
-      data.scheduleLimitations || '',
-      data.emergencyName || '',
-      data.emergencyPhone || '',
-      data.emergencyRelationship || '',
-      data.whyInterested || '',
-      data.experienceLevel || '',
-      data.experienceDescription || '',
-      programAreas,
-      resumeLink,
-      certLink,
-      otherLink,
-      data.infoAccurate || '',
-      data.understandsNoGuarantee || '',
-      sigLink,
-      data.dateSubmitted || submittedAt,
-      guardianSigLink,
-      data.isUnder18 ? 'Yes' : 'No'
+      submittedAt,                          // A: Submitted At
+      data.firstName || '',                 // B: First Name
+      data.lastName || '',                  // C: Last Name
+      data.dob || '',                       // D: Date of Birth
+      data.age || '',                       // E: Age
+      data.phone || '',                     // F: Phone Number
+      data.email || '',                     // G: Email Address
+      data.address || '',                   // H: Home Address
+      data.cityStateZip || '',              // I: City, State, ZIP
+      data.preferredContact || '',          // J: Preferred Contact
+      data.isUnder18 ? 'Yes' : 'No',       // K: Under 18
+      data.guardianName || '',              // L: Parent/Guardian Name
+      data.guardianPhone || '',             // M: Parent/Guardian Phone
+      data.guardianEmail || '',             // N: Parent/Guardian Email
+      data.guardianRelationship || '',      // O: Relationship to Applicant (Parent)
+      data.enrolledInSchool || '',          // P: Enrolled in School
+      data.currentSchool || '',             // Q: Current/Recent School
+      data.highestGrade || '',              // R: Highest Grade Completed
+      data.currentlyWorking || '',          // S: Currently Working
+      data.otherProgram || '',              // T: In Another Program
+      data.otherProgramName || '',          // U: Other Program Name
+      data.reliableTransportation || '',    // V: Reliable Transportation
+      data.scheduleLimitations || '',       // W: Schedule Limitations
+      data.emergencyName || '',             // X: Emergency Contact Name
+      data.emergencyPhone || '',            // Y: Emergency Contact Phone
+      data.emergencyRelationship || '',     // Z: Emergency Contact Relationship
+      data.whyInterested || '',             // AA: Why Interested
+      data.experienceLevel || '',           // AB: Experience Level
+      data.experienceDescription || '',     // AC: Experience Description
+      programAreas,                         // AD: Interested Program Areas
+      resumeLink,                           // AE: Resume Link
+      certLink,                             // AF: Certifications Link
+      otherLink,                            // AG: Other Documents Link
+      data.infoAccurate || '',              // AH: Info Accurate
+      data.understandsNoGuarantee || '',    // AI: Understands No Guarantee
+      sigLink,                              // AJ: Applicant Signature
+      data.dateSubmitted || submittedAt,    // AK: Date Submitted
+      guardianSigLink                       // AL: Parent/Guardian Signature
     ];
     sheet.appendRow(row);
     return ContentService.createTextOutput(JSON.stringify({ status: 'success' }))
