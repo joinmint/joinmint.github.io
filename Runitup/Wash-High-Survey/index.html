@@ -52,13 +52,28 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background:#f5f5f5; color:#33
 .card ul { padding-left:20px; margin-top:8px; }
 
 /* === SURVEY CARDS === */
-.survey-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
-@media(max-width:600px){ .survey-grid { grid-template-columns:1fr; } }
-.survey-card { background:#fff; border-radius:10px; padding:20px; text-align:center;
-  border:2px solid #e0e0e0; box-shadow:0 1px 4px rgba(0,0,0,.06); }
+.survey-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-bottom:20px; }
+@media(max-width:600px){ .survey-grid { grid-template-columns:1fr; gap:20px; } }
+.survey-card { background:#fff; border-radius:12px; padding:24px; text-align:center;
+  border:3px solid #e0e0e0; box-shadow:0 2px 8px rgba(0,0,0,.08); }
+.survey-card.guardian { border-color:#1565c0; }
+.survey-card.guardian h3 { color:#1565c0; }
+.survey-card.guardian .survey-btn { background:#1565c0; }
+.survey-card.guardian .survey-btn:hover { background:#0d47a1; }
+.survey-card.youth { border-color:#c62828; }
+.survey-card.youth h3 { color:#c62828; }
+.survey-card.youth .survey-btn { background:#c62828; }
+.survey-card.youth .survey-btn:hover { background:#a31f1f; }
 .survey-card .reward { font-size:1.5rem; font-weight:700; color:#c62828; margin:8px 0; }
-.survey-card .time { font-size:.85rem; color:#888; margin-bottom:8px; }
-.survey-card .conf { font-size:.8rem; color:#666; font-style:italic; margin-top:8px; line-height:1.4; }
+.survey-card.guardian .reward { color:#1565c0; }
+.survey-card .time { font-size:.85rem; color:#888; margin-bottom:12px; }
+.survey-card .conf { font-size:.8rem; color:#666; font-style:italic; margin-top:12px; line-height:1.4; }
+.survey-btn { display:inline-block; color:#fff; font-size:.95rem; font-weight:600;
+  padding:12px 24px; border-radius:8px; text-decoration:none; margin-top:10px; transition:background .2s; }
+.survey-card .label { display:inline-block; font-size:.75rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:1px; padding:4px 12px; border-radius:20px; margin-bottom:10px; }
+.survey-card.guardian .label { background:#e3f2fd; color:#1565c0; }
+.survey-card.youth .label { background:#ffebee; color:#c62828; }
 
 /* === MAP === */
 .map-container { text-align:center; margin-top:12px; }
@@ -121,18 +136,22 @@ footer { text-align:center; padding:20px; font-size:.8rem; color:#999; }
 
     <!-- SURVEY CARDS -->
     <div class="survey-grid">
-      <div class="survey-card">
-        <h3>Guardian Survey</h3>
+      <div class="survey-card guardian">
+        <div class="label">For Parents &amp; Guardians</div>
+        <h3>&#128104;&#8205;&#128105;&#8205;&#128103; Guardian Survey</h3>
         <div style="font-size:.9rem; color:#555;">Washington Highlands Community</div>
         <div class="reward">$50</div>
         <div class="time">~15 minutes</div>
+        <a href="https://redcap.research.gwu.edu/surveys/?s=MKF3MX4TNPMDC8WE" class="survey-btn" target="_blank">Start Guardian Survey &#8594;</a>
         <div class="conf">&#128274; Completely confidential — your name is never shared with your data outside of this study.</div>
       </div>
-      <div class="survey-card">
-        <h3>Youth Survey</h3>
+      <div class="survey-card youth">
+        <div class="label">For Youth</div>
+        <h3>&#129489;&#8205;&#127891; Youth Survey</h3>
         <div style="font-size:.9rem; color:#555;">Washington Highlands Community</div>
         <div class="reward">$50</div>
         <div class="time">~45 minutes</div>
+        <a href="https://redcap.research.gwu.edu/surveys/?s=R9W4XD3839KJ4WYA" class="survey-btn" target="_blank">Start Youth Survey &#8594;</a>
         <div class="conf">&#128274; Completely confidential — your name is never shared with your data outside of this study.</div>
       </div>
     </div>
