@@ -1,127 +1,123 @@
 # Mint Project Culinary Internship Form - Setup Guide
 
 ## Overview
-This is a 35-question culinary internship intake form that collects applicant information, experience, certifications, and availability. File uploads are supported (certifications/training documents).
+The form architecture consists of:
+- **GitHub Pages** (static HTML form): `https://joinmint.github.io/culinary-internship/`
+- **Google Apps Script** (backend handler): Receives form submissions, uploads files, logs to Google Sheet
+- **Google Sheet** (database): Stores all 36 submission fields
+- **Google Drive Folder** (file storage): Stores uploaded certifications/documents
 
-## Architecture
-- **Frontend:** GitHub Pages (HTML form at `/culinary-internship/index.html`)
-- **Backend:** Google Apps Script (processes submissions, uploads files, logs to Sheet)
-- **Storage:** Google Drive (file uploads) + Google Sheets (submission log)
+**Current Status:**
+- ✅ HTML form created and deployed to GitHub
+- ✅ Google Sheet created: `Culinary Internship Submissions`
+- ✅ Google Drive folder created: `Culinary Internship - File Uploads`
+- ✅ Code.gs (Apps Script backend) ready
+- ⏳ **YOU NEED:** Create Apps Script project and deploy it
 
-## Setup Steps
+---
 
-### 1. Create a Google Sheet for Submissions
-- Create a new Google Sheet
-- Name it: "Culinary Internship Submissions"
-- Add these column headers in row 1:
-  1. Submitted At
-  2. First Name
-  3. Last Name
-  4. Email
-  5. Phone
-  6. Date of Birth
-  7. Age
-  8. Gender
-  9. Street Address
-  10. City
-  11. State
-  12. ZIP Code
-  13. Culinary Experience
-  14. Kitchen Roles
-  15. Cuisine Expertise
-  16. Cooking Skills Level
-  17. Strongest Skills
-  18. Areas for Improvement
-  19. Certifications
-  20. Certification Details
-  21. Dietary Restrictions
-  22. Schedule Commitment
-  23. Schedule Conflicts
-  24. Transportation
-  25. Career Goals
-  26. Program Interest
-  27. Why Join
-  28. References
-  29. Guardian Name
-  30. Guardian Relationship
-  31. Guardian Email
-  32. Guardian Phone
-  33. Guardian Signature
-  34. Guardian Signature Date
-  35. Agreement
-  36. File Upload Folder Link
+## Step 1: Create a Google Apps Script Project
 
-### 2. Create a Google Drive Folder
-- Create a new folder in Google Drive named "Culinary Internship - File Uploads"
-- Copy the folder ID from the URL (it's the long alphanumeric string after `/folders/`)
+1. Open **Google Apps Script**: https://script.google.com/
+2. Click **New Project** (top left)
+3. Name it: `Culinary Internship Form`
+4. You'll see a blank `Code.gs` file
 
-### 3. Create a Google Apps Script Project
-- Go to https://script.google.com
-- Create a new project
-- Name it: "Culinary Internship Form"
-- Delete the default `Code.gs` file
-- Create a new file named `Code.gs`
-- Paste the contents from `/culinary-internship/Code.gs` in this repository
-- In the Apps Script editor, open the script and find these lines:
-  ```javascript
-  var SHEET_ID = ''; // Will be set during setup
-  var DRIVE_FOLDER_ID = ''; // Will be set during setup
-  ```
-- Replace with your actual IDs:
-  ```javascript
-  var SHEET_ID = 'YOUR_SHEET_ID_HERE';
-  var DRIVE_FOLDER_ID = 'YOUR_FOLDER_ID_HERE';
-  ```
-- **Get your Sheet ID:** Open your Google Sheet, copy the ID from the URL (it's between `/d/` and `/edit`)
-- **Get your Folder ID:** Open your Google Drive folder, copy the ID from the URL (it's after `/folders/`)
+---
 
-### 4. Deploy the Apps Script
-- In Apps Script editor, click "Deploy" → "New deployment"
-- Select type: "Web app"
-- Execute as: Your email
-- Who has access: "Anyone"
-- Click "Deploy"
-- Copy the deployment URL (it looks like: `https://script.google.com/macros/s/AKfycby.../exec`)
+## Step 2: Replace the Code
 
-### 5. Update the Form with Your Apps Script URL
-- Open `/culinary-internship/index.html`
-- Find this line near the top of the `<script>` section:
-  ```javascript
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/...';  ```
-- Replace with your deployed Apps Script URL
-- Commit and push to GitHub
+1. **Delete** the default code in `Code.gs` (select all: `Ctrl+A`, then delete)
+2. **Copy the entire contents** from `/tasklet/agent/home/culinary-internship/Code.gs` (local file)
+3. **Paste** it into the Apps Script `Code.gs` file
+4. Click **Save** (Ctrl+S)
 
-### 6. Deploy to GitHub Pages
-- Push all files to the `joinmint/joinmint.github.io` repository under `/culinary-internship/`
-- Ensure `.nojekyll` exists in the repo root
-- The form will be live at: `https://joinmint.github.io/culinary-internship/`
+**Key IDs Already in Code:**
+- Sheet ID: `14lUBFXcFI65tzkU08XRwfGN-U5wZaIWDGMt5DkkDu1k`
+- Drive Folder ID: `1b-ZYBO4VikXdmQuOXmCTBxJvs9hEuRxo`
 
-## File Structure
-```
-culinary-internship/
-├── index.html           # Main intake form
-├── Code.gs              # Google Apps Script backend
-└── SETUP.md             # This setup guide
-```
+---
 
-## Features
-- ✅ 35-question intake form
-- ✅ Parent/Guardian section (auto-expands if applicant is under 18)
-- ✅ File uploads for certifications/training documents
-- ✅ Real-time form validation
-- ✅ Success screen after submission
-- ✅ All submissions logged to Google Sheet
-- ✅ File uploads stored in Google Drive
+## Step 3: Deploy as Web App
 
-## Testing
-1. Fill out the form completely
-2. Upload a test file
-3. Submit
-4. Check Google Sheet for the new row
-5. Check Google Drive folder for the uploaded file
+1. Click **Deploy** (top right, near Save)
+2. Click **New deployment** (blue button)
+3. Click the **Select type** dropdown (gear icon) → Choose **Web app**
+4. Fill in the form:
+   - **Execute as:** `join@mintproject.org` (your Mint Project account)
+   - **Who has access:** `Anyone` (so the form can submit)
+5. Click **Deploy**
+6. A dialog will appear with the deployment URL. **Copy the entire URL** (looks like: `https://script.google.com/macros/s/AKfycby...xxxxx/exec`)
 
-## Notes
-- The form requires all marked fields (*) before submission
-- Guardian information is only required for applicants under 18
-- Files are organized in dated folders by applicant name
-- Submitted At timestamp is server-side (always accurate)
+---
+
+## Step 4: Update the Form with the Deployment URL
+
+1. Open `/tasklet/agent/home/culinary-internship/index.html` in a text editor
+2. Find the line (around line 30-40):
+   ```javascript
+   const APPS_SCRIPT_URL = '';  // Replace with your deployment URL
+   ```
+3. Replace the empty string with your deployment URL:
+   ```javascript
+   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby...xxxxx/exec';
+   ```
+4. Save the file
+
+---
+
+## Step 5: Push Updated Form to GitHub
+
+1. Commit and push the updated `index.html` to GitHub:
+   ```bash
+   git add culinary-internship/index.html
+   git commit -m "Add Apps Script deployment URL for Culinary form"
+   git push
+   ```
+
+---
+
+## Step 6: Verify the Form is Live
+
+1. Visit: `https://joinmint.github.io/culinary-internship/`
+2. Fill out the form with test data
+3. Upload a test file (image, PDF, or document)
+4. Submit
+5. Check the Google Sheet: https://docs.google.com/spreadsheets/d/14lUBFXcFI65tzkU08XRwfGN-U5wZaIWDGMt5DkkDu1k/edit
+   - New row should appear with submitted data
+   - "Files Uploaded" should be "Yes"
+   - Files should appear in: https://drive.google.com/drive/folders/1b-ZYBO4VikXdmQuOXmCTBxJvs9hEuRxo
+
+---
+
+## Troubleshooting
+
+**Form says "Submission failed":**
+- Check the deployment URL is correct and doesn't have typos
+- Make sure you selected "Anyone" has access in deployment settings
+
+**Files not uploading:**
+- Check the Drive folder ID in `Code.gs` line 3: `var DRIVE_FOLDER_ID = '1b-ZYBO4VikXdmQuOXmCTBxJvs9hEuRxo';`
+- Check folder permissions on Google Drive
+
+**Data not appearing in Sheet:**
+- Check the Sheet ID in `Code.gs` line 2: `var SHEET_ID = '14lUBFXcFI65tzkU08XRwfGN-U5wZaIWDGMt5DkkDu1k';`
+- Make sure Apps Script has permission to access the Sheet
+
+---
+
+## Resources
+
+- **Google Sheet:** https://docs.google.com/spreadsheets/d/14lUBFXcFI65tzkU08XRwfGN-U5wZaIWDGMt5DkkDu1k/edit
+- **Drive Folder:** https://drive.google.com/drive/folders/1b-ZYBO4VikXdmQuOXmCTBxJvs9hEuRxo
+- **GitHub Repo:** https://github.com/joinmint/joinmint.github.io
+- **Form URL:** https://joinmint.github.io/culinary-internship/
+
+---
+
+Once deployed, the form will automatically:
+- ✅ Log submissions to Google Sheet
+- ✅ Upload files to Google Drive folder
+- ✅ Calculate applicant age and under-18 status
+- ✅ Show "Submission Successful!" message
+- ✅ Allow applicants to submit another report
