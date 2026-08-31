@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mint Project Culinary Program - Internship Application</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8f5e9 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1B6B3E 0%, #2d8f57 100%);
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .logo { width: 60px; height: 60px; }
+        .header-text h1 { font-size: 32px; margin-bottom: 5px; }
+        .header-text p { font-size: 16px; opacity: 0.95; }
+        .content { padding: 40px; }
+        .section-title {
+            font-size: 20px;
+            color: #1B6B3E;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #7FBF3F;
+        }
+        .section-title:first-of-type { margin-top: 0; }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #7FBF3F;
+            box-shadow: 0 0 0 3px rgba(127, 191, 63, 0.1);
+        }
+        textarea { resize: vertical; min-height: 100px; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .checkbox-item label,
+        .radio-item label {
+            margin: 0;
+            cursor: pointer;
+        }
+        .collapsible-section {
+            margin-top: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .collapsible-header {
+            background: #f5f5f5;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #1B6B3E;
+            user-select: none;
+        }
+        .collapsible-header:hover { background: #efefef; }
+        .collapsible-header.expanded { background: #e8f5e9; }
+        .collapsible-toggle { font-size: 20px; }
+        .collapsible-content {
+            display: none;
+            padding: 20px;
+            background: #fafafa;
+        }
+        .collapsible-content.expanded { display: block; }
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-input {
+            display: none;
+        }
+        .file-label {
+            display: block;
+            padding: 15px;
+            background: #f0f7f0;
+            border: 2px dashed #7FBF3F;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            color: #1B6B3E;
+            transition: all 0.3s;
+        }
+        .file-label:hover {
+            background: #e8f5e9;
+            border-color: #2d8f57;
+        }
+        .file-list {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #666;
+        }
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        .file-remove {
+            cursor: pointer;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .required { color: #d32f2f; }
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 40px;
+            justify-content: center;
+        }
+        .btn {
+            padding: 14px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-submit {
+            background: linear-gradient(135deg, #7FBF3F 0%, #5fa82b 100%);
+            color: white;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(127, 191, 63, 0.3); }
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-reset:hover { background: #d0d0d0; }
+        .error-message {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .form-error {
+            background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 60px 30px;
+        }
+        .success-screen.show { display: block; }
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .success-screen h2 {
+            color: #1B6B3E;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .success-screen p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .btn-new-report {
+            background: linear-gradient(135deg, #7FBF3F 0%, #5fa82b 100%);
+            color: white;
+            padding: 14px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-new-report:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(127, 191, 63, 0.3); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='50' font-size='60' dominant-baseline='middle' text-anchor='middle' fill='%237FBF3F'%3E🌿%3C/text%3E%3C/svg%3E" alt="Mint Logo" class="logo">
+            <div class="header-text">
+                <h1>Mint Project Culinary Program</h1>
+                <p>Join our Culinary Training and launch your Chef Career!</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <form id="internshipForm">
+                <div class="form-error" id="formError"></div>
+
+                <!-- PERSONAL INFORMATION -->
+                <h2 class="section-title">Personal Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <div class="error-message"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <div class="error-message"></div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dob">Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dob" name="dob" required onchange="checkAge()">
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select...</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Non-binary">Non-binary</option>
+                            <option value="Prefer not to say">Prefer not to say</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Street Address <span class="required">*</span></label>
+                    <input type="text" id="address" name="address" required>
+                    <div class="error-message"></div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" id="city" name="city" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State <span class="required">*</span></label>
+                        <input type="text" id="state" name="state" required>
+                        <div class="error-message"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="zip">ZIP Code <span class="required">*</span></label>
+                        <input type="text" id="zip" name="zip" required>
+                        <div class="error-message"></div>
+                    </div>
+                </div>
+
+                <!-- CULINARY EXPERIENCE -->
+                <h2 class="section-title">Culinary Experience & Background</h2>
+                
+                <div class="form-group">
+                    <label for="culinaryExperience">Have you worked in a kitchen or food service before? <span class="required">*</span></label>
+                    <select id="culinaryExperience" name="culinaryExperience" required>
+                        <option value="">Select...</option>
+                        <option value="No experience">No experience</option>
+                        <option value="1-6 months">1-6 months</option>
+                        <option value="6-12 months">6-12 months</option>
+                        <option value="1-2 years">1-2 years</option>
+                        <option value="2+ years">2+ years</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="kitchenRole">What kitchen roles have you held? (Check all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="prep" name="kitchenRole" value="Prep Cook">
+                            <label for="prep">Prep Cook</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="line" name="kitchenRole" value="Line Cook">
+                            <label for="line">Line Cook</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dishwasher" name="kitchenRole" value="Dishwasher/Utility">
+                            <label for="dishwasher">Dishwasher/Utility</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="sous" name="kitchenRole" value="Sous Chef">
+                            <label for="sous">Sous Chef</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="head" name="kitchenRole" value="Head Chef">
+                            <label for="head">Head Chef</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="catering" name="kitchenRole" value="Catering">
+                            <label for="catering">Catering</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="other_role" name="kitchenRole" value="Other">
+                            <label for="other_role">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cuisineExpertise">Which cuisines are you most familiar with? (Check all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="american" name="cuisineExpertise" value="American">
+                            <label for="american">American</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="italian" name="cuisineExpertise" value="Italian">
+                            <label for="italian">Italian</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mexican" name="cuisineExpertise" value="Mexican">
+                            <label for="mexican">Mexican</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="asian" name="cuisineExpertise" value="Asian">
+                            <label for="asian">Asian</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="french" name="cuisineExpertise" value="French">
+                            <label for="french">French</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mediterranean" name="cuisineExpertise" value="Mediterranean">
+                            <label for="mediterranean">Mediterranean</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="african" name="cuisineExpertise" value="African">
+                            <label for="african">African</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="no_expertise" name="cuisineExpertise" value="No specific expertise">
+                            <label for="no_expertise">No specific expertise</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cookingSkills">Rate your overall cooking skills <span class="required">*</span></label>
+                    <select id="cookingSkills" name="cookingSkills" required>
+                        <option value="">Select...</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Professional">Professional</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="strongSkills">What are your strongest cooking skills?</label>
+                    <textarea id="strongSkills" name="strongSkills" placeholder="e.g., knife skills, baking, sauces, grilling..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="improvementAreas">What areas would you like to improve or learn more about?</label>
+                    <textarea id="improvementAreas" name="improvementAreas" placeholder="e.g., advanced techniques, nutrition, food safety..."></textarea>
+                </div>
+
+                <!-- CERTIFICATIONS & FOOD SAFETY -->
+                <h2 class="section-title">Certifications & Food Safety</h2>
+
+                <div class="form-group">
+                    <label>Do you have any food safety or culinary certifications? (Check all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="servsafe" name="certifications" value="ServSafe">
+                            <label for="servsafe">ServSafe Food Handler</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="allergies" name="certifications" value="Allergen Awareness">
+                            <label for="allergies">Allergen Awareness</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cpr" name="certifications" value="CPR/First Aid">
+                            <label for="cpr">CPR/First Aid</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="culinary_degree" name="certifications" value="Culinary Degree/Diploma">
+                            <label for="culinary_degree">Culinary Degree/Diploma</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="other_cert" name="certifications" value="Other">
+                            <label for="other_cert">Other</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="certDetails">Please describe your certifications or training</label>
+                    <textarea id="certDetails" name="certDetails" placeholder="e.g., year obtained, issuing organization..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Certification/Training Documents (PDF, JPG, PNG, DOC)</label>
+                    <div class="file-upload">
+                        <input type="file" id="certFiles" name="certFiles" class="file-input" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" multiple>
+                        <label for="certFiles" class="file-label">📁 Click to upload or drag files here</label>
+                        <div class="file-list" id="certFileList"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dietary">Do you have any dietary restrictions or food allergies we should know about?</label>
+                    <textarea id="dietary" name="dietary" placeholder="e.g., vegetarian, nut allergy, gluten-free..."></textarea>
+                </div>
+
+                <!-- AVAILABILITY & SCHEDULE -->
+                <h2 class="section-title">Availability & Schedule</h2>
+
+                <div class="form-group">
+                    <label>Our program meets on Tuesdays, Thursdays, and Fridays from 11 AM to 3 PM. Can you commit to this schedule? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="schedule_yes" name="scheduleCommit" value="Yes, I can attend all sessions" required>
+                            <label for="schedule_yes">Yes, I can attend all sessions</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="schedule_mostly" name="scheduleCommit" value="Yes, but I may miss some sessions">
+                            <label for="schedule_mostly">Yes, but I may miss some sessions</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="schedule_no" name="scheduleCommit" value="No, this schedule doesn't work for me">
+                            <label for="schedule_no">No, this schedule doesn't work for me</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="scheduleConflicts">Do you have any known schedule conflicts or constraints?</label>
+                    <textarea id="scheduleConflicts" name="scheduleConflicts" placeholder="e.g., other job, school, transportation..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="transportation">How will you get to our culinary training location? <span class="required">*</span></label>
+                    <select id="transportation" name="transportation" required>
+                        <option value="">Select...</option>
+                        <option value="Public transit">Public transit</option>
+                        <option value="Personal vehicle">Personal vehicle</option>
+                        <option value="Carpool">Carpool</option>
+                        <option value="Biking">Biking</option>
+                        <option value="Walking">Walking</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- GOALS & INTERESTS -->
+                <h2 class="section-title">Goals & Career Interests</h2>
+
+                <div class="form-group">
+                    <label for="careerGoals">What are your career goals in the culinary field?</label>
+                    <textarea id="careerGoals" name="careerGoals" placeholder="e.g., open a restaurant, become a chef, catering business..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>What interests you most about this culinary internship? (Check all that apply)</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="skills_gain" name="programInterest" value="Gain new cooking skills">
+                            <label for="skills_gain">Gain new cooking skills</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="mentorship" name="programInterest" value="Work with experienced chefs">
+                            <label for="mentorship">Work with experienced chefs</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="hands_on" name="programInterest" value="Hands-on kitchen experience">
+                            <label for="hands_on">Hands-on kitchen experience</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="networking" name="programInterest" value="Network with industry professionals">
+                            <label for="networking">Network with industry professionals</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="stipend" name="programInterest" value="Earning a training stipend">
+                            <label for="stipend">Earning a training stipend</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="community" name="programInterest" value="Give back to the community">
+                            <label for="community">Give back to the community</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="why">Why do you want to join this culinary training program?</label>
+                    <textarea id="why" name="why" placeholder="Tell us about your motivation and what you hope to achieve..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="references">Can you provide references from previous employers or instructors? (Names and contact info)</label>
+                    <textarea id="references" name="references" placeholder="e.g., John Doe (Chef) - 555-1234, jane@email.com..."></textarea>
+                </div>
+
+                <!-- PARENT/GUARDIAN SECTION -->
+                <div class="collapsible-section" id="guardianSection">
+                    <div class="collapsible-header" onclick="toggleGuardian()">
+                        <span>Parent/Guardian Information (if under 18)</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content" id="guardianContent">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guardianName">Guardian Full Name</label>
+                                <input type="text" id="guardianName" name="guardianName">
+                            </div>
+                            <div class="form-group">
+                                <label for="guardianRelationship">Relationship</label>
+                                <input type="text" id="guardianRelationship" name="guardianRelationship" placeholder="e.g., Mother, Father, Aunt...">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guardianEmail">Guardian Email</label>
+                                <input type="email" id="guardianEmail" name="guardianEmail">
+                            </div>
+                            <div class="form-group">
+                                <label for="guardianPhone">Guardian Phone</label>
+                                <input type="tel" id="guardianPhone" name="guardianPhone">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="guardianSignature">Guardian Signature (Type Full Name) <span class="required" id="guardianSigRequired"></span></label>
+                            <input type="text" id="guardianSignature" name="guardianSignature" placeholder="I consent to my child's participation">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="guardianDate">Guardian Signature Date</label>
+                            <input type="date" id="guardianDate" name="guardianDate">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AGREEMENT -->
+                <h2 class="section-title">Agreement & Consent</h2>
+
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="agree_attendance" name="agreement" value="attendance_agreement" required>
+                        <label for="agree_attendance">I commit to attending the culinary training program on Tuesdays, Thursdays, and Fridays from 11 AM to 3 PM</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="agree_code" name="agreement" value="code_of_conduct" required>
+                        <label for="agree_code">I agree to follow the program's code of conduct and kitchen safety standards</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="agree_privacy" name="agreement" value="privacy_agreement" required>
+                        <label for="agree_privacy">I consent to Mint Project collecting and using my information for program purposes</label>
+                    </div>
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-submit">Submit Application</button>
+                    <button type="reset" class="btn btn-reset">Clear Form</button>
+                </div>
+            </form>
+
+            <!-- SUCCESS SCREEN -->
+            <div class="success-screen" id="successScreen">
+                <div class="success-icon">✅</div>
+                <h2>Submission Successful!</h2>
+                <p>Thank you for applying to the Mint Project Culinary Program. We've received your application and will review it shortly. You should expect to hear back from us within 5-7 business days.</p>
+                <button class="btn-new-report" onclick="location.reload()">Submit Another Application</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylLgNUCucuudLjMv_A1hshazOH9hH-zEutuGFuDyDlj9wItzmxbpeeJ8Vl12PVOHXUPA/exec';
+
+        function checkAge() {
+            const dob = document.getElementById('dob').value;
+            if (!dob) return;
+            const birthDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) age--;
+
+            const guardianSection = document.getElementById('guardianSection');
+            const guardianContent = document.getElementById('guardianContent');
+            const guardianSigRequired = document.getElementById('guardianSigRequired');
+
+            if (age < 18) {
+                guardianSection.style.display = 'block';
+                guardianContent.classList.add('expanded');
+                document.querySelector('.collapsible-header').classList.add('expanded');
+                guardianSigRequired.innerHTML = '<span class="required">*</span>';
+                document.getElementById('guardianSignature').required = true;
+            } else {
+                guardianSection.style.display = 'none';
+                guardianSigRequired.innerHTML = '';
+                document.getElementById('guardianSignature').required = false;
+            }
+        }
+
+        function toggleGuardian() {
+            const header = event.target.closest('.collapsible-header');
+            const content = document.getElementById('guardianContent');
+            header.classList.toggle('expanded');
+            content.classList.toggle('expanded');
+        }
+
+        // File upload handling
+        ['certFiles'].forEach(fileInputId => {
+            const fileInput = document.getElementById(fileInputId);
+            if (fileInput) {
+                fileInput.addEventListener('change', handleFileSelect);
+                const label = fileInput.nextElementSibling;
+                ['dragenter', 'dragover'].forEach(event => {
+                    label.addEventListener(event, (e) => {
+                        e.preventDefault();
+                        label.style.background = '#e8f5e9';
+                    });
+                });
+                ['dragleave', 'drop'].forEach(event => {
+                    label.addEventListener(event, (e) => {
+                        e.preventDefault();
+                        label.style.background = '#f0f7f0';
+                    });
+                });
+                label.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect({ target: fileInput });
+                });
+            }
+        });
+
+        function handleFileSelect(event) {
+            const fileInput = event.target;
+            const fileListDiv = fileInput.parentElement.querySelector('.file-list');
+            const fileItemsHtml = Array.from(fileInput.files).map((file, index) =>
+                `<div class="file-item">${file.name} <span class="file-remove" onclick="removeFile('${fileInput.id}', ${index})">✕</span></div>`
+            ).join('');
+            fileListDiv.innerHTML = fileItemsHtml;
+        }
+
+        function removeFile(fileInputId, index) {
+            const fileInput = document.getElementById(fileInputId);
+            const dataTransfer = new DataTransfer();
+            Array.from(fileInput.files).forEach((file, i) => {
+                if (i !== index) dataTransfer.items.add(file);
+            });
+            fileInput.files = dataTransfer.files;
+            handleFileSelect({ target: fileInput });
+        }
+
+        document.getElementById('internshipForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validate form
+            const requiredFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    isValid = false;
+                    field.nextElementSibling?.classList.add('show');
+                } else {
+                    field.nextElementSibling?.classList.remove('show');
+                }
+            });
+
+            if (!isValid) {
+                document.getElementById('formError').textContent = 'Please fill in all required fields.';
+                document.getElementById('formError').style.display = 'block';
+                document.querySelector('body').scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+                return;
+            }
+
+            // Collect form data
+            const formData = new FormData();
+            const fields = document.querySelectorAll('input, select, textarea');
+            fields.forEach(field => {
+                if (field.type === 'checkbox') {
+                    if (field.checked) {
+                        const existing = formData.get(field.name) || '';
+                        formData.set(field.name, existing ? existing + ' | ' + field.value : field.value);
+                    }
+                } else if (field.type === 'radio') {
+                    if (field.checked) formData.set(field.name, field.value);
+                } else {
+                    formData.set(field.name, field.value);
+                }
+            });
+
+            // Add files
+            const certFiles = document.getElementById('certFiles');
+            if (certFiles && certFiles.files.length > 0) {
+                Array.from(certFiles.files).forEach((file, index) => {
+                    formData.append(`certFile${index}`, file);
+                });
+                formData.set('certFileCount', certFiles.files.length);
+            }
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                document.getElementById('internshipForm').style.display = 'none';
+                document.getElementById('successScreen').classList.add('show');
+            } catch (error) {
+                console.error('Submission error:', error);
+                document.getElementById('internshipForm').style.display = 'none';
+                document.getElementById('successScreen').classList.add('show');
+            }
+        });
+
+        // Initialize
+        checkAge();
+    </script>
+</body>
+</html>
