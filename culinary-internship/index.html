@@ -252,11 +252,27 @@
             margin-bottom: 30px;
             border-radius: 8px;
             border-left: 5px solid #7FBF3F;
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .program-intro-logo {
+            flex-shrink: 0;
+            width: 180px;
+        }
+        .program-intro-logo img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+        .program-intro-content {
+            flex: 1;
         }
         .program-intro h3 {
             color: #1B6B3E;
             font-size: 20px;
             margin-bottom: 15px;
+            margin-top: 0;
         }
         .program-intro ul {
             list-style: none;
@@ -291,12 +307,17 @@
 
         <div class="content">
             <div class="program-intro">
-                <h3>DC Culinary Beautification Program</h3>
-                <ul>
-                    <li><strong>Prepare 5000 meals</strong> for neighbors in need</li>
-                    <li><strong>Explore Career, Social Emotional and Faith Development</strong></li>
-                    <li><strong>Equip future Chef's with 5 star training</strong></li>
-                </ul>
+                <div class="program-intro-logo">
+                    <img src="mint-email-logo.jpg" alt="Mint Project Logo">
+                </div>
+                <div class="program-intro-content">
+                    <h3>DC Culinary Beautification Program</h3>
+                    <ul>
+                        <li><strong>Prepare 5000 meals</strong> for neighbors in need</li>
+                        <li><strong>Explore Career, Social Emotional and Faith Development</strong></li>
+                        <li><strong>Equip future Chef's with 5 star training</strong></li>
+                    </ul>
+                </div>
             </div>
 
             <form id="internshipForm">
