@@ -246,12 +246,43 @@
             font-weight: 600;
         }
         .btn-new-report:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(127, 191, 63, 0.3); }
+        .program-intro {
+            background: linear-gradient(135deg, #f0f7f0 0%, #e8f5e9 100%);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border-left: 5px solid #7FBF3F;
+        }
+        .program-intro h3 {
+            color: #1B6B3E;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .program-intro ul {
+            list-style: none;
+            padding: 0;
+        }
+        .program-intro li {
+            color: #333;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+        }
+        .program-intro li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #7FBF3F;
+            font-weight: bold;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='50' font-size='60' dominant-baseline='middle' text-anchor='middle' fill='%237FBF3F'%3E🌿%3C/text%3E%3C/svg%3E" alt="Mint Logo" class="logo">
+            <img src="mint-logo.png" alt="Mint Project Logo" class="logo">
             <div class="header-text">
                 <h1>Mint Project Culinary Program</h1>
                 <p>Join our Culinary Training and launch your Chef Career!</p>
@@ -259,6 +290,15 @@
         </div>
 
         <div class="content">
+            <div class="program-intro">
+                <h3>DC Culinary Beautification Program</h3>
+                <ul>
+                    <li><strong>Prepare 5000 meals</strong> for neighbors in need</li>
+                    <li><strong>Explore Career, Social Emotional and Faith Development</strong></li>
+                    <li><strong>Equip future Chef's with 5 star training</strong></li>
+                </ul>
+            </div>
+
             <form id="internshipForm">
                 <div class="form-error" id="formError"></div>
 
